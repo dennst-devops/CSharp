@@ -1,0 +1,17 @@
+/* *{
+    border: 1px solid black;
+} */
+
+img{
+    height: 290px;
+    width: 350px;
+}
+h2{
+    text-align: center;
+}
+
+.myclass{
+    height: 300px;
+    width: 80%;
+    overflow-y: scroll;
+}
