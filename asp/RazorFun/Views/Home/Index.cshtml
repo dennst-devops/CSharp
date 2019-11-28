@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Razor Fun</title>
+</head>
+<body>
+    <h2>Here are some delicious foods!</h2>
+    @{
+    var StringList = new List<string>
+    {
+        "mangoes",
+        "lasagna",
+        "burgers",
+        "brussel sprouts"
+    };
+        
+    foreach(var word in StringList)
+    {
+        <div>
+
+            @if(word.StartsWith('l'))
+            {
+                <p style="color: red;">@word</p>
+            } else {
+                <p>@word</p>
+            }
+        </div>
+    }
+}
+</body>
+</html>
