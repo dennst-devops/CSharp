@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dojo Survey</title>
+    <link rel="stylesheet" href="~/css/style.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container" >
+        <br>
+        <form action="method" method="post">
+            <div class="row">
+                <div class="col-sm-2">
+                    Your Name:
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" name="ht_name">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-2">
+                    Dojo Location:
+                </div>
+                <div class="col-sm-3">
+                    <select name="ht_loc">
+                        <option value="Seattle">Seattle</option>
+                        <option value="San Jose">San Jose</option>
+                        <option value="Dallas">Dallas</option>
+                        <option value="Boise">Boise</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-2">
+                    Favorite Language:
+                </div>
+                <div class="col-sm-3">
+                    <select name="ht_lang">
+                        <option value="C#">C#</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="Python">Python</option>
+                        <option value="SQL">SQL</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-5">
+                    <label for="comment">Comment:</label>
+                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                </div>
+            </div>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
