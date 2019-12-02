@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using DojoSurvey.Models;
 
 namespace DojoSurvey
 {
+
+
     public class HomeController : Controller
     {
         [HttpGet]
@@ -11,15 +14,25 @@ namespace DojoSurvey
             return View("Index");
         }
 
-        [HttpPost]
-        [Route("method")]
-        public IActionResult Method(string ht_name, string ht_loc, string ht_lang, string comment)
+        // [HttpPost]
+        // [Route("method")]
+        // public IActionResult Method()
+        // {
+        //     return View("result");
+        // }
+
+        [HttpPost("survey")]
+        public IActionResult Submission(Survey survey)
         {
-            ViewBag.Name = ht_name;
-            ViewBag.Loc = ht_loc;
-            ViewBag.Lang = ht_lang;
-            ViewBag.Comment = comment;
-            return View("Result");
+            // Survey mySurvey = new Survey()
+            // {
+            //     Name = ht_name,
+            //     Location = ht_loc,
+            //     Language = ht_lang,
+            //     Comment = comment
+            // };
+            return View("Result", survey);
         }
+
     }
 }

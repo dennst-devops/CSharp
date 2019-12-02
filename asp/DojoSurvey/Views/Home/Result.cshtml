@@ -10,13 +10,17 @@
     <title>Results</title>
 </head>
 <body>
+    @using DojoSurvey.Models
+    @model DojoSurvey.Models.Survey
+
+
     <div class="container">
         <div class="row">
             <div class="col-sm-2">
                 Name:
             </div>
             <div class="col-sm-3">
-                @ViewBag.Name                
+                @Model.Name
             </div>
         </div>
         <div class="row">
@@ -24,7 +28,7 @@
                 Dojo Location:
             </div>
             <div class="col-sm-3">
-                @ViewBag.Loc
+                @Model.Location
             </div>
         </div>
         <div class="row">
@@ -32,7 +36,7 @@
                 Favorite Language:
             </div>
             <div class="col-sm-3">
-                @ViewBag.Lang
+                @Model.Language
             </div>
         </div>
         <div class="row">
@@ -40,7 +44,7 @@
                 Comment
             </div>
             <div class="col-sm-3">
-                @ViewBag.Comment
+                @Model.Comment
             </div>
         </div>
         <br>

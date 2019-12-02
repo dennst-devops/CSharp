@@ -12,13 +12,13 @@
 <body>
     <div class="container" >
         <br>
-        <form action="method" method="post">
+        <form action="/survey" method="post">
             <div class="row">
                 <div class="col-sm-2">
                     Your Name:
                 </div>
                 <div class="col-sm-3">
-                    <input type="text" name="ht_name">
+                    <input type="text" name="name">
                 </div>
             </div>
             <br>
@@ -27,7 +27,7 @@
                     Dojo Location:
                 </div>
                 <div class="col-sm-3">
-                    <select name="ht_loc">
+                    <select name="location">
                         <option value="Seattle">Seattle</option>
                         <option value="San Jose">San Jose</option>
                         <option value="Dallas">Dallas</option>
@@ -41,7 +41,7 @@
                     Favorite Language:
                 </div>
                 <div class="col-sm-3">
-                    <select name="ht_lang">
+                    <select name="language">
                         <option value="C#">C#</option>
                         <option value="JavaScript">JavaScript</option>
                         <option value="Python">Python</option>
@@ -53,7 +53,7 @@
             <div class="row">
                 <div class="col-sm-5">
                     <label for="comment">Comment:</label>
-                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                    <textarea class="form-control" rows="5" name="comment"></textarea>
                 </div>
             </div>
             <br>
