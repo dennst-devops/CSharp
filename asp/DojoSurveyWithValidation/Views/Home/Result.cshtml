@@ -1,0 +1,45 @@
+@using DojoSurveyWithValidation.Models
+@model DojoSurveyWithValidation.Models.Survey
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2">
+                Name:
+            </div>
+            <div class="col-sm-3">
+                @Model.Name
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                Dojo Location:
+            </div>
+            <div class="col-sm-3">
+                @Model.Location
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                Favorite Language:
+            </div>
+            <div class="col-sm-3">
+                @Model.Language
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                Comment
+            </div>
+            <div class="col-sm-3">
+                @Model.Comment
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-2">
+                <a href="/">Go Back</a>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using DojoSurveyWithValidation.Models
+@model Survey
+
+
+    <div class="container" >
+        <br>
+        <form asp-action="Survey" asp-controller="Home" method="post">
+        <div class="row">
+            <div class="col-sm-2">
+                <span asp-validation-for="Name"></span>
+                <label asp-for="Name"></label>
+            </div>
+            <div class="col-sm-3">
+                <input asp-for="Name">
+            </div>
+        </div>
+
+
+            <br>
+            <div class="row">
+                <div class="col-sm-2">
+                    <span asp-validation-for="Location"></span>
+                    <label asp-for="Location"></label>
+                </div>
+                <div class="col-sm-3">
+                    <select asp-for="Location">
+                        <option value="">Please choose a location </option>
+                        <option value="Seattle">Seattle</option>
+                        <option value="San Jose">San Jose</option>
+                        <option value="Dallas">Dallas</option>
+                        <option value="Boise">Boise</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-2">
+                    <span asp-validation-for="Language"></span>
+                    <label asp-for="Language"></label>
+                </div>
+                <div class="col-sm-3">
+                    <select asp-for="Language">
+                        <option value="">Please choose a language</option>
+                        <option value="C#">C#</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="Python">Python</option>
+                        <option value="SQL">SQL</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-5">
+                    <span asp-validation-for="Comment"></span>
+                    <label asp-for="Comment"></label>
+                    <textarea class="form-control" rows="5" asp-for="Comment"></textarea>
+                </div>
+            </div>
+            <br>
+            <input value="Submit!" type="submit"> 
+        </form>
+    </div>
