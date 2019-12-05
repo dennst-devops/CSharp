@@ -57,6 +57,7 @@ namespace CRUDelicious.Controllers
                 OneDish.Calories = myDish.Calories;
                 OneDish.Tastiness = myDish.Tastiness;
                 OneDish.Description = myDish.Description;
+                OneDish.UpdatedAt = DateTime.Now;
                 dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
