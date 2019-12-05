@@ -1,0 +1,23 @@
+@{
+    ViewData["Title"] = "Details";
+}
+
+@using CRUDelicious.Models
+@model Dish
+
+<br>
+<a href="/">Home</a>
+<br>
+<div class="text-center">
+<h1>@Model.Name</h1>
+<h3>@Model.Chef</h3>
+<hr style="border: 1px black solid;">
+</div>
+
+
+<p>@Model.Description</p>
+<p><b>Calories: </b> @Model.Calories</p>
+<p><b>Tastiness: </b> @Model.Tastiness</p>
+
+<a href="delete/@Model.DishID" class="btn btn-danger">Delete</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="/edit/@Model.DishID" class="btn btn-info">Edit</a>

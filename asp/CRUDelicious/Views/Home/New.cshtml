@@ -1,0 +1,58 @@
+@{
+    ViewData["Title"] = "New";
+}
+
+<div class="text-center">
+<h1>Add a new Dish!</h1>
+</div>
+
+<a href="/">Home</a>
+<br>
+@using CRUDelicious.Models
+@model Dish
+
+<form asp-action="create" asp-controller="Home" method="post">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                    <br><span asp-validation-for="Chef"></span><br>
+                    <label asp-for="Chef"></label>
+                <br>
+                    <input asp-for="Chef">
+                <br>
+                    <br><span asp-validation-for="Name"></span><br>
+                    <label asp-for="Name"></label>
+                <br>
+                    <input asp-for="Name">
+                <br>
+                    <br><span asp-validation-for="Calories"></span><br>
+                    <label asp-for="Calories"></label>
+                <br>
+                    <input asp-for="Calories">
+            </div>
+
+            <div class="col-sm-4">
+                <br><span asp-validation-for="Tastiness"></span><br>
+                <label asp-for="Tastiness"></label>
+                <br>
+                    <select asp-for="Tastiness">
+                        <option value="0">Please rate how tasty the dish is</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+            </div>
+        <br>
+            <div class="col-sm-4">
+                <br><span asp-validation-for="Description"></span><br>
+                <label asp-for="Description"></label>
+                <br>
+                <textarea asp-for="Description" rows="5" cols="50"></textarea>
+            </div>
+        </div>
+    </div>
+    <br>
+    <input value="Update dish!" type="submit"> 
+</form>
