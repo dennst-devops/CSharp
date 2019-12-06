@@ -1,0 +1,109 @@
+## make sure it builds first
+dotnet watch run
+
+##Models\Context.cs
+using Microsoft.EntityFrameworkCore;
+//add all of this:
+namespace !!CHANGETOTHEACTUALNAME!!.Models
+{
+    public class MyContext : DbContext
+    {
+        public MyContext(DbContextOptions options) : base(options) { }
+        public DbSet<Thing> Things {get;set;}
+    }
+}
+
+##appsettings.json
+//add all of this
+//change the db name
+,   // include this comma
+!!change the db name!!
+    "DBInfo":
+    {
+        "Name": "MySQLconnect",
+        "ConnectionString": "server=localhost;userid=root;password=root;port=3306;database=!!!!CHANGETHISTOAREALNAME!!!!;SslMode=None"
+    }
+
+
+##Startup.cs
+//add to usings in top:
+    using !!CHANGETOTHEACTUALNAME!!.Models;
+    using Microsoft.EntityFrameworkCore;
+//add this for the sql connection info in the json file
+//right after the line "public void ConfigureServices(IServiceCollection services)"
+services.AddDbContext<MyContext>(options => options.UseMySql(Configuration["DBInfo:ConnectionString"]));
+services.AddSession();
+//remove these lines for the cookies
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+app.UseCookiePolicy();
+// add this in place of the cookie policy:
+app.UseSession();
+
+##Views\Shared\_Layout.cshtml
+//remove these 2 sections
+<header>
+<footer>
+//remove this one line:
+<partial name="_CookieConsentPartial" />
+
+##Models\Things.cs
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    namespace !!CHANGETOTHEACTUALNAME!!.Models
+    {
+        public class Thing
+        {
+            [Key]
+            public int ThingId { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string Email { get; set; }
+            public string Password { get; set; }
+            public DateTime CreatedAt {get;set;}
+            public DateTime UpdatedAt {get;set;}
+            [NotMapped]
+            [Compare("Password")]
+            [DataType(DataType.Password)]
+            public string Confirm {get;set;}
+        }
+    }
+
+##Controllers\HomeController.cs
+//add these 3 - though the others should be there already
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
+using System.Linq;
+using !!CHANGETOTHEACTUALNAME!!.Models;
+// add these after the "public class HomeController : Controller" line
+        private MyContext dbContext;
+     
+        public HomeController(MyContext context)
+        {
+            dbContext = context;
+        }
+// add these 2 before the index method/route
+        [HttpGet]
+        [Route("")]
+//example list of Things for the index/dashboard route
+List<Thing> AllThings = dbContext.Things.ToList();
+
+
+##Views\Home\Index.cshtml
+//add these 2 lines
+@using !!CHANGETOTHEACTUALNAME!!.Models
+@model Thing
+
+!!stop the run, then
+dotnet build
+
+##migrations
+// make sure a build isn't running
+dotnet ef migrations add FirstMigration
+dotnet ef database update
