@@ -1,0 +1,55 @@
+@{
+    ViewData["Title"] = "Account";
+}
+
+@using BankAccounts.Models
+@model User
+<div class="text-center">
+    <h1 class="display-4">Account</h1>
+</div>
+<div class="text-right">
+    <a href="/logout">Logout</a>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h2>Welcome, @Model.FirstName</h2>
+        </div>
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-2">
+            Current balance: $$$$
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-3">
+            Deposit/Withdraw <input type="number">
+        </div>
+        <div class="col-sm-2">
+            <input value="Submit" type="submit"> 
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-6">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- foreach (var dish in Model) -->
+                        
+                            <tr>
+                                <td>$000.00</td>
+                                <td>2019/12/12</td>
+                            </tr>
+                        
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
