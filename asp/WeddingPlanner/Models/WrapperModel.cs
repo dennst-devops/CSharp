@@ -12,5 +12,6 @@ namespace WeddingPlanner.Models
         public List<User> AllUsers { get; set; }
         public Wedding OneWedding { get; set; }
         public List<Wedding> AllWeddings { get; set; }
+        public Connector OneConnector { get; set; }
     }
 }

@@ -50,9 +50,15 @@
                                 if (@Model.LoggedInUser.UserId == @w.CreatedByID){
                                 <a href="/Delete/@w.WeddingId">Delete</a>
                                 }
-                                if (@Model.OneWedding.Guests.Any(c => c.UserId == @Model.LoggedInUser.UserId))
-                                {
-                                    
+                                else{
+                                    if (@w.Guests.Any(c => c.UserId == @Model.LoggedInUser.UserId))
+                                    {
+                                        <a href="/UnRsvp/@w.WeddingId">Un-RSVP</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/rsvp/@w.WeddingId">RSVP</a>
+                                    }
                                 }
                             }
                         </td>

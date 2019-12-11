@@ -30,17 +30,6 @@ namespace WeddingPlanner.Models
         [PastDateValidation]
         [Display(Name = "Wedding date:")]
         public DateTime WeddingDate { get; set; }
-        public class PastDateValidationAttribute : ValidationAttribute
-        {
-            protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-            {
-                if ((DateTime)value < DateTime.Now)
-                {
-                    return new ValidationResult("Wedding date must be in the future");
-                }
-                return ValidationResult.Success;
-            }
-        }
 
         // [Required(ErrorMessage = "You must enter a number greater than one")]
         // [Display(Name = "ZZZZZZZ:")]
@@ -56,5 +45,16 @@ namespace WeddingPlanner.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
+    }
+    public class PastDateValidationAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            if ((DateTime)value < DateTime.Now)
+            {
+                return new ValidationResult("Wedding date must be in the future");
+            }
+            return ValidationResult.Success;
+        }
     }
 }

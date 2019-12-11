@@ -28,7 +28,7 @@ namespace WeddingPlanner.Controllers
             }
             else
             {
-                return View("Dashboard");
+                return RedirectToAction("Dashboard", HttpContext.Session.GetInt32("SessionUserID"));
             }
         }
 
@@ -59,7 +59,6 @@ namespace WeddingPlanner.Controllers
         [HttpPost("login")]
         public IActionResult Login(User userSubmission)
         {
-
             WrapperViewModel myViewWrapperModel = new WrapperViewModel();
             myViewWrapperModel.LoggedInUser = dbContext.Users.FirstOrDefault(user => user.Email == userSubmission.Email);
             // myThing.AllUsers = ...
@@ -88,7 +87,7 @@ namespace WeddingPlanner.Controllers
             if (HttpContext.Session.GetInt32("SessionUserID") != null)
             {
                 WrapperViewModel allTheThings = new WrapperViewModel();
-                allTheThings.LoggedInUser = dbContext.Users.FirstOrDefault(user => user.UserId == HttpContext.Session.GetInt32("SessionUserID"));
+                allTheThings.LoggedInUser = dbContext.Users.FirstOrDefault(user => user.UserId == (int)HttpContext.Session.GetInt32("SessionUserID"));
                 allTheThings.AllWeddings = dbContext.Weddings.Include(w => w.Guests).ToList();
                 allTheThings.AllUsers = dbContext.Users.Include(u => u.Weddings).ToList();
                 return View("Dashboard", allTheThings);
@@ -102,12 +101,20 @@ namespace WeddingPlanner.Controllers
         [HttpGet("NewWedding")]
         public IActionResult NewWedding()
         {
+            if (HttpContext.Session.GetInt32("SessionUserID") == null)
+            {
+                return View("Index");
+            }
             return View();
         }
 
         [HttpPost("createwedding")]
         public IActionResult CreateWedding(Wedding newWedding)
         {
+            if (HttpContext.Session.GetInt32("SessionUserID") == null)
+            {
+                return View("Index");
+            }
             if (ModelState.IsValid)
             {
                 newWedding.CreatedByID = (int)HttpContext.Session.GetInt32("SessionUserID");
@@ -124,6 +131,11 @@ namespace WeddingPlanner.Controllers
         [HttpGet("{weddingID}")]
         public IActionResult WeddingDetails(int weddingID)
         {
+            if (HttpContext.Session.GetInt32("SessionUserID") == null)
+            {
+                return View("Index");
+            }
+
             if (HttpContext.Session.GetInt32("SessionUserID") != null)
             {
                 WrapperViewModel allTheThings = new WrapperViewModel();
@@ -131,6 +143,11 @@ namespace WeddingPlanner.Controllers
                 allTheThings.LoggedInUser = dbContext.Users.FirstOrDefault(user => user.UserId == HttpContext.Session.GetInt32("SessionUserID"));
                 allTheThings.AllWeddings = dbContext.Weddings.Include(w => w.Guests).ToList();
                 allTheThings.AllUsers = dbContext.Users.Include(u => u.Weddings).ToList();
+
+                if (allTheThings.OneWedding == null)
+                {
+                    return RedirectToAction("Dashboard");
+                }
                 return View("WeddingDetails", allTheThings);
             }
             else
@@ -142,8 +159,70 @@ namespace WeddingPlanner.Controllers
         [HttpGet("Delete/{myWeddingId}")]
         public IActionResult Delete(int myWeddingId)
         {
+            if (HttpContext.Session.GetInt32("SessionUserID") == null)
+            {
+                return View("Index");
+            }
             Wedding OneWedding = dbContext.Weddings.FirstOrDefault(result => result.WeddingId == myWeddingId);
+            if (OneWedding == null)
+            {
+                return RedirectToAction("Dashboard");
+            }
+            if (OneWedding.CreatedByID != HttpContext.Session.GetInt32("SessionUserID"))
+            {
+                return RedirectToAction("Dashboard");
+            }
             dbContext.Weddings.Remove(OneWedding);
+            dbContext.SaveChanges();
+            return RedirectToAction("Dashboard");
+        }
+
+        [HttpGet("rsvp/{weddingID}")]
+        public IActionResult Rsvp(int weddingID)
+        {
+            if (HttpContext.Session.GetInt32("SessionUserID") == null)
+            {
+                return View("Index");
+            }
+
+            WrapperViewModel allTheThings = new WrapperViewModel();
+            allTheThings.OneConnector = new Connector();
+
+            allTheThings.OneConnector.UserId = (int)HttpContext.Session.GetInt32("SessionUserID");
+            allTheThings.OneConnector.WeddingId = weddingID;
+            Wedding OneWedding = dbContext.Weddings.FirstOrDefault(result => result.WeddingId == weddingID);
+            if (OneWedding == null)
+            {
+                return RedirectToAction("Dashboard");
+            }
+
+            dbContext.Add(allTheThings.OneConnector);
+            dbContext.SaveChanges();
+
+            return RedirectToAction("Dashboard");
+        }
+
+        [HttpGet("UnRSVP/{weddingID}")]
+        public IActionResult UnRSVP(int weddingID)
+        {
+            if (HttpContext.Session.GetInt32("SessionUserID") == null)
+            {
+                return View("Index");
+            }
+            WrapperViewModel allTheThings = new WrapperViewModel();
+            allTheThings.OneConnector = new Connector();
+
+            allTheThings.OneConnector.UserId = (int)HttpContext.Session.GetInt32("SessionUserID");
+            allTheThings.OneConnector.WeddingId = weddingID;
+            Connector thisRsvp = dbContext.Connectors.FirstOrDefault(w => w.WeddingId == weddingID && w.UserId == allTheThings.OneConnector.UserId);
+
+            Wedding OneWedding = dbContext.Weddings.FirstOrDefault(result => result.WeddingId == weddingID);
+            if (OneWedding == null)
+            {
+                return RedirectToAction("Dashboard");
+            }
+
+            dbContext.Remove(thisRsvp);
             dbContext.SaveChanges();
             return RedirectToAction("Dashboard");
         }
