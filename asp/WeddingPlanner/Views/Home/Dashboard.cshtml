@@ -1,0 +1,70 @@
+@{
+    ViewData["Title"] = "Wedding Planner Dashboard";
+}
+
+@using WeddingPlanner.Models
+@model WrapperViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <h2>Welcome to the Wedding Planner, @Model.LoggedInUser.FirstName</h2>
+        </div>
+        <div class="col-sm-2">
+            <a href="logout">Log Out</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10">
+            <table class="table table-striped">
+                <thead>
+                    <th>
+                        Wedding
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Guests
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </thead>
+                    @foreach(var w in Model.AllWeddings)
+                    {
+                    <tr>
+                        <td>
+                            <a href="/@w.WeddingId">
+                            @w.WedderOne &amp; @w.WedderTwo 
+                            </a>
+                        </td>
+                        <td>
+                            @w.WeddingDate.Year-@w.WeddingDate.Month-@w.WeddingDate.Day
+                        </td>
+                        <td>
+                            @w.Guests.Count
+                        </td>
+                        <td>
+                            @{
+                                if (@Model.LoggedInUser.UserId == @w.CreatedByID){
+                                <a href="/Delete/@w.WeddingId">Delete</a>
+                                }
+                                if (@Model.OneWedding.Guests.Any(c => c.UserId == @Model.LoggedInUser.UserId))
+                                {
+                                    
+                                }
+                            }
+                        </td>
+                    </tr>
+                    }
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8"></div>
+        <div class="col-sm-2">
+            <a href="/NewWedding" class="btn btn-info">New Wedding</a>
+        </div>
+    </div>
+</div>
