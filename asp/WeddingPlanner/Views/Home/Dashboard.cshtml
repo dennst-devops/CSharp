@@ -40,26 +40,25 @@
                             </a>
                         </td>
                         <td>
-                            @w.WeddingDate.Year-@w.WeddingDate.Month-@w.WeddingDate.Day
+                            @w.WeddingDate.ToShortDateString()
                         </td>
                         <td>
                             @w.Guests.Count
                         </td>
                         <td>
                             @{
-                                if (@Model.LoggedInUser.UserId == @w.CreatedByID){
-                                <a href="/Delete/@w.WeddingId">Delete</a>
-                                }
-                                else{
-                                    if (@w.Guests.Any(c => c.UserId == @Model.LoggedInUser.UserId))
+                                if (@Model.LoggedInUser.UserId == @w.CreatedByID)
+                                    {
+                                    <a href="/Delete/@w.WeddingId">Delete</a>  <a href="/edit/@w.WeddingId">Edit</a>
+                                    }
+                                else if (@w.Guests.Any(c => c.UserId == @Model.LoggedInUser.UserId))
                                     {
                                         <a href="/UnRsvp/@w.WeddingId">Un-RSVP</a>
                                     }
-                                    else
+                                else
                                     {
                                         <a href="/rsvp/@w.WeddingId">RSVP</a>
                                     }
-                                }
                             }
                         </td>
                     </tr>

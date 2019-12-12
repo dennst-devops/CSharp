@@ -4,7 +4,7 @@
 
 @using WeddingPlanner.Models
 @model WrapperViewModel
-
+<br>
 <div class="container">
     <div class="row">
         <div class="col-sm-8">
@@ -17,11 +17,24 @@
             <a href="logout">Log Out</a>
         </div>
     </div>
+    <br>
     <div class="row">
-        Date: @Model.OneWedding.WeddingDate.Year-@Model.OneWedding.WeddingDate.Month-@Model.OneWedding.WeddingDate.Day
+        <h4>
+        Date: @Model.OneWedding.WeddingDate.ToLongDateString()
+        </h4>
     </div>
-
+    <div class="row">
+        <h4>
+        Address: @Model.OneWedding.Address
+        </h4>
+    </div>
+    <div class="row">
+        <h4>
         Guests: <br>
+        </h4>
+    </div>
+        
+
         @foreach(var g in Model.OneWedding.Guests)
         {
             <p>

@@ -1,0 +1,69 @@
+@{
+    ViewData["Title"] = "Edit Wedding";
+}
+
+@using WeddingPlanner.Models
+@model Wedding
+<br>
+<div class="row">
+    <div class="col-sm-6">
+        <h2>
+            Edit Your Wedding
+        </h2>
+    </div>
+    <div class="col-sm-2">
+        <a href="/Dashboard">Dashboard</a>
+    </div>
+    <div class="col-sm-2">
+        <a href="logout">Log Out</a>
+    </div>
+</div>
+<div class="row">
+    <form asp-action="UpdateWedding" asp-controller="Home" asp-route-WeddingId="@Model.WeddingId" method="post">
+        <div class="row">
+            <div class="col-sm-5">
+                <span asp-validation-for="WedderOne"></span><br>
+                <label asp-for="WedderOne"></label>
+            </div>
+            <div class="col-sm-5">
+                <br>
+                <input asp-for="WedderOne">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-5">
+                <span asp-validation-for="WedderTwo"></span><br>
+                <label asp-for="WedderTwo"></label>
+            </div>
+            <div class="col-sm-5">
+                <br>
+                <input asp-for="WedderTwo">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-5">
+                <span asp-validation-for="WeddingDate"></span><br>
+                <label asp-for="WeddingDate"></label>
+            </div>
+            <div class="col-sm-5">
+                <br>
+                <input asp-for="WeddingDate">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-5">
+                <span asp-validation-for="Address"></span><br>
+                <label asp-for="Address"></label>
+            </div>
+            <div class="col-sm-5">
+                <br>
+                <input asp-for="Address">
+            </div>
+        </div>
+        <br>
+        <input value="Update" type="submit" class="btn btn-info"> 
+    </form>
+</div>
