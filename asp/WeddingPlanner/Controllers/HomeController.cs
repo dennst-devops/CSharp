@@ -69,6 +69,10 @@ namespace WeddingPlanner.Controllers
                 ModelState.AddModelError("Email", "Invalid Email/Password (email)");
                 return View("Index", userSubmission);
             }
+            if(userSubmission.Password == null)
+            {
+                return View("Index", userSubmission);
+            }
             var hasher = new PasswordHasher<User>();
             var result = hasher.VerifyHashedPassword(userSubmission, userInDb.Password, userSubmission.Password);
             if (result == 0)
